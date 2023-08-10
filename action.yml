@@ -1,0 +1,33 @@
+name: 'Install scalable-git-branching-tools'
+description: 'Installs the scalable git branching tools for a git repository'
+inputs:
+  tools_path:
+    description: |
+      Directory in which to checkout the git tools
+    default: '${{ runner.temp }}/git-tools'
+  repository:
+    description: |
+      Repository containing the git tools
+    default: PrincipleStudios/scalable-git-branching-tools
+  version:
+    description: |
+      Version of the git tools repository to install. Must be a commitish from the repository.
+    default: main
+  repo_path:
+    description: |
+      Directory with a git project in which to install the git tools
+    default: '${{ github.workspace }}'
+outputs: {}
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        repository: '${{ inputs.repository }}'
+        ref: '${{ inputs.version }}'
+        fetch-depth: 1
+        path: '${{ inputs.tools_path }}'
+
+    - shell: pwsh
+      working-directory: '${{ inputs.repo_path }}'
+      run: '"${{ inputs.tools_path }}/init.ps1"'

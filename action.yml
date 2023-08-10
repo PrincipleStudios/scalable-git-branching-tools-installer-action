@@ -7,8 +7,8 @@ inputs:
     default: '${{ runner.temp }}/git-tools'
   repository:
     description: |
-      Repository containing the git tools
-    default: PrincipleStudios/scalable-git-branching-tools
+      Repository to clone containing the git tools
+    default: https://github.com/PrincipleStudios/scalable-git-branching-tools.git
   version:
     description: |
       Version of the git tools repository to install. Must be a commitish from the repository.
@@ -21,12 +21,9 @@ outputs: {}
 runs:
   using: 'composite'
   steps:
-    - uses: actions/checkout@v3
-      with:
-        repository: '${{ inputs.repository }}'
-        ref: '${{ inputs.version }}'
-        fetch-depth: 1
-        path: '${{ inputs.tools_path }}'
+    - shell: pwsh
+      run: git clone --branch '${{ inputs.version }}' --single-branch --depth 1 '${{ inputs.repository }}' '${{ inputs.tools_path }}'
+      # Does not use actions/checkout because path must be within github.workspace to use that action
 
     - shell: pwsh
       working-directory: '${{ inputs.repo_path }}'

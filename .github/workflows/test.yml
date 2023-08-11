@@ -22,5 +22,8 @@ jobs:
       - name: Install tools
         uses: ./
 
+      - name: Show git config
+        run: cat .git/config
+
       - name: Verify tools are installed
         run: git show-upstream

@@ -23,4 +23,7 @@ jobs:
         uses: ./
 
       - name: Verify tools are installed
-        run: git-show-upstream.ps1
+        shell: pwsh
+        run: |
+          echo $env:PATH
+          git-show-upstream.ps1

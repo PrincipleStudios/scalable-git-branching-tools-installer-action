@@ -26,5 +26,4 @@ runs:
       # Does not use actions/checkout because path must be within github.workspace to use that action
 
     - shell: pwsh
-      working-directory: '${{ inputs.repo_path }}'
-      run: '"${{ inputs.tools_path }}/init.ps1"'
+      run: echo "${{ inputs.tools_path }}" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append

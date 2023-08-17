@@ -25,5 +25,16 @@ jobs:
       - name: Verify tools are installed
         shell: pwsh
         run: |
+          get-command git-add-upstream.ps1
+          get-command git-new.ps1
+          get-command git-pull-upstream.ps1
+          get-command git-rc.ps1
+          get-command git-release.ps1
+          get-command git-show-upstream.ps1
+          get-command git-verify-updated.ps1
+
+      - name: Verify path path
+        shell: pwsh
+        run: |
           echo $env:PATH
-          git-show-upstream.ps1
+          if ($env:PATH -notcontains '${{ runner.temp }}/git-tools') { throw 'not in path' }

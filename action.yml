@@ -13,10 +13,6 @@ inputs:
     description: |
       Version of the git tools repository to install. Must be a commitish from the repository.
     default: main
-  repo_path:
-    description: |
-      Directory with a git project in which to install the git tools
-    default: '${{ github.workspace }}'
 outputs: {}
 runs:
   using: 'composite'

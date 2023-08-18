@@ -29,10 +29,6 @@ git config --local user.name "${INPUT_AUTHOR_NAME}"
     # Version of the git tools repository to install. Must be a commitish from the repository.
     # default: main
     version: ''
-
-    # Directory with a git project in which to install the git tools
-    # default: '${{ github.workspace }}'
-    repo_path: ''
 ```
 
 # Scenarios
